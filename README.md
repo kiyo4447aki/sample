@@ -27,41 +27,7 @@
 
 ### データフロー
 
-```mermaid
-flowchart LR
-  subgraph Camera
-    CS[Go streamer\n(camera/stream)]
-    CT[Python thermalwatcher\n(camera/thermal)]
-  end
-
-  subgraph Recorder
-    RS[Go streaming\n(recorder/streaming)]
-    RA[Go API\n(recorder/api)]
-  end
-
-  subgraph Backend
-    BA[Go API\n(backend/api)]
-    BJ[Janus SFU\n(backend/janus)]
-    BN[nginx]
-    BF[frps]
-    GCS[(Object Storage)]
-    FCM[(FCM)]
-    PG[(PostgreSQL)]
-  end
-
-  subgraph App
-    APP[React Native (Expo)\n(app)]
-  end
-
-  CS -- RTP/UDP (H.264) --> RS
-  RS -- WebRTC --> BJ
-  APP -- WS --> BJ
-  APP -- HTTPS --> BN --> BA --> PG
-  CT -- reserve/upload --> BA --> GCS
-  BA -- send --> FCM --> APP
-```
-
----
+## ![データフロー](./dataflow.png)
 
 ## フォルダ構成（実体）
 
