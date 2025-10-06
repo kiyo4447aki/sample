@@ -1,0 +1,23 @@
+# ==== 接続先（サーバ = frps） ====
+serverAddr = ""   
+serverPort = 7000                   
+
+# ==== 認証 ====
+[auth]
+method = "token"
+token  = ""  
+
+# ==== トランスポート / TLS ====
+[transport.tls]
+enable    = true                    # frps: transport.tls.force = true に対応
+serverName = ""   # SNI/証明書検証用（証明書のFQDNに合わせる）
+
+
+
+[[proxies]]
+name = "cam01-http"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 8080
+
+customDomains = [""]

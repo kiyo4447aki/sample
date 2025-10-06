@@ -1,0 +1,43 @@
+
+bindAddr            = "0.0.0.0"
+bindPort            = 7000
+
+transport.tls.force     = true
+transport.tls.certFile  = ""
+transport.tls.keyFile   = ""
+
+
+#TODOトークン設定
+auth.method         = "token"
+auth.token          = ""
+
+
+vhostHTTPPort      = 60003
+#vhostHTTPSCertFile  = "/etc/frp/tls/vhost.crt"
+#vhostHTTPSKeyFile   = "/etc/frp/tls/vhost.key"
+
+
+webServer.addr      = "0.0.0.0"
+webServer.port      = 60002
+webServer.user      = ""
+webServer.password  = ""
+
+
+
+#TODO prometheus設定
+#enablePrometheus    = true
+#prometheusAddr      = "127.0.0.1"
+#prometheusPort      = 9100
+
+# クライアントあたりの同時プロキシ数上限
+maxPortsPerClient   = 5
+
+allowPorts          = [
+    { start = 10000, end = 19999 }
+]
+
+detailedErrorsToClient = false
+
+udpPacketSize       = 1500
+natholeAnalysisDataReserveHours = 24
+

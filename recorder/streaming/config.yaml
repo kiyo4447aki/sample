@@ -1,0 +1,13 @@
+# config.yaml
+
+# Janus サーバの WebSocket URL
+janus_url: ""
+room_id: ""
+room_pass: 74935125
+
+# デバイスごとの設定一覧
+devices:
+    cam-01:
+        # 録画ファイルの保存先ディレクトリ
+        recdir: "/recordings/dev1"
+        port: 47000

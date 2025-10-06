@@ -1,0 +1,17 @@
+[Unit]
+Description=Thermal Hotspot Watcher + Uploader (Lepton3.1R + PureThermal3)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=thermal
+Group=thermal
+EnvironmentFile=/etc/thermalwatcher.env
+ExecStart=/opt/thermalwatcher-venv/bin/python /opt/thermalwatcher/thermalwatcher_uploader.py
+Restart=always
+RestartSec=2
+RuntimeMaxSec=7d
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

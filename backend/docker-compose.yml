@@ -1,0 +1,74 @@
+version: "3.8"
+services:
+    api:
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        expose:
+            - "60001"
+        volumes:
+            - ./credentials/20240823.json:/secrets/fcm.json:ro
+        networks:
+            - backend
+        restart: unless-stopped
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    frps:
+        build:
+            context: ./frps
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        ports:
+            - "7000:7000" # メインの待ち受けポート
+        volumes:
+            - /etc/letsencrypt:/etc/letsencrypt:ro
+        expose:
+            - "60002" # 管理ダッシュボードの待ち受けポート
+            - "60003" # 仮想ホストの待ち受けポート
+        networks:
+            - frontend
+            - backend
+
+    janus:
+        build:
+            context: ./janus
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        #ports:
+        # rtp用ポート
+        #- "20000-40000:20000-40000"
+        #- "20000-40000:20000-40000/udp"
+        #expose:
+        #    - "60004" # httpサーバ
+        #    - "60005" # WebSocketサーバ
+        network_mode: host
+
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        volumes:
+            - /etc/letsencrypt:/etc/letsencrypt:ro
+
+        ports:
+            - "5000:5000"
+            - "6000:6000"
+            - "8000:8000"
+            - "9000:9000"
+        networks:
+            - frontend
+            - backend
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+networks:
+    frontend:
+        driver: bridge
+    backend:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.31.0.0/24
+                  gateway: 172.31.0.1

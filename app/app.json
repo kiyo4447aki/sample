@@ -1,0 +1,77 @@
+{
+  "expo": {
+    "name": "app-proto",
+    "slug": "app-proto",
+    "scheme": "app-proto",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bitcode": false,
+      "bundleIdentifier": "",
+      "googleServicesFile": "./firebase/GoogleService-Info-test.plist",
+      "buildNumber": "1",
+      "entitlements": {
+        "aps-environment": "development"
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.CAMERA",
+        "android.permission.INTERNET",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.WAKE_LOCK",
+        "android.permission.BLUETOOTH",
+        "android.permission.POST_NOTIFICATIONS"
+      ],
+      "package": "",
+      "googleServicesFile": "./firebase/google-services.json"
+    },
+    "web": {},
+    "plugins": [
+      "@config-plugins/react-native-webrtc",
+      "react-native-video",
+      "@react-native-firebase/app",
+      "@react-native-firebase/messaging",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24,
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34
+          },
+          "ios": {
+            "deploymentTarget": "15.1",
+            "useFrameworks": "static"
+          }
+        }
+      ],
+      "./config/withNotifeeAndroidFix.js",
+      "./config/androidDefaultNotificationChannel.js"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6a329c4b-8741-4c0e-96bf-30cfaac4e8c5"
+      }
+    },
+    "owner": ""
+  }
+}
