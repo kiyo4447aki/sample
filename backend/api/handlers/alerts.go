@@ -1,5 +1,7 @@
 package handlers
 
+// TODO DB操作をmodelsパッケージに分離
+
 import (
 	"context"
 	"errors"
